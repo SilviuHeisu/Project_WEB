@@ -1,0 +1,25 @@
+{
+  "name": "project_web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon script.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SilviuHeisu/Project_WEB.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SilviuHeisu/Project_WEB/issues"
+  },
+  "homepage": "https://github.com/SilviuHeisu/Project_WEB#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sequelize": "^6.12.0-beta.1",
+    "sqlite3": "^5.0.2"
+  }
+}
