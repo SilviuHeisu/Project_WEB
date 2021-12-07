@@ -2,6 +2,7 @@
 const express = require("express");
 const app = express();
 require("./models/student");
+
 const sequelize = require("./sequelize");
 app.listen(7000, async () => {
   console.log("Server start on 7000");
