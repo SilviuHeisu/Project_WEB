@@ -1,8 +1,7 @@
 const sequelize = require("../sequelize");
 const { DataTypes } = require("sequelize/dist");
-
 const Student = sequelize.define("Student", {
-  id: {
+  StudentId: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
@@ -19,4 +18,22 @@ const Student = sequelize.define("Student", {
     validate: { isEmail: true },
   },
 });
+
+const Jury = sequelize.define("Juries", {
+  juryId: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  userID: {
+    type: DataTypes.INTEGER,
+  },
+  projectId: {
+    type: DataTypes.INTEGER,
+  },
+  grade: {
+    type: DataTypes.REAL,
+  },
+});
+Student.hasOne(Jury);
 module.exports = Student;

@@ -1,12 +1,12 @@
 const sequelize = require("../sequelize");
 const { DataTypes } = require("sequelize/dist");
 const Jury = sequelize.define("Juries", {
-  id: {
+  juryId: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  studentId: {
+  userID: {
     type: DataTypes.INTEGER,
   },
   projectId: {
