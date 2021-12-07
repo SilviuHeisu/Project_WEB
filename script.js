@@ -4,6 +4,8 @@ const app = express();
 require("./models/student");
 require("./models/teams");
 require("./models/user");
+require("./models/project");
+
 
 
 const sequelize = require("./sequelize");
