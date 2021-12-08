@@ -9,7 +9,9 @@ const Project = sequelize.define("Project", {
   projectName:{
      type: DataTypes.STRING,
      allowNull: false
-  }
+  }, 
+  teamId: {
+    type: DataTypes.INTEGER }
 });
 
 module.exports = Project;

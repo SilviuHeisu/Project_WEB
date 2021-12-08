@@ -2,15 +2,15 @@ const sequelize = require("../sequelize");
 const { DataTypes } = require("sequelize/dist");
 
 const User = sequelize.define("User", {
-    userName: {
+    userId: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
+        primaryKey: true
+        
       },
     password:{ type: DataTypes.STRING,
          allowNull: false },
     isProfessor:{
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.INTEGER,
         allowNull:false
     }
 });
