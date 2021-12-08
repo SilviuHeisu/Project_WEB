@@ -6,7 +6,9 @@ const sequelize = new Sequelize({
     timestamps: false,
   },
 });
-sequelize.sync().then(() => {
+sequelize.sync({
+  alter: true
+}).then(() => {
   console.log("All models have been sync");
 });
 module.exports = sequelize;

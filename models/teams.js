@@ -2,7 +2,7 @@ const sequelize = require("../sequelize");
 const { DataTypes } = require("sequelize/dist");
 
 const Teams = sequelize.define("Teams", {
-    teamID: {
+    teamId: {
         type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
