@@ -2,10 +2,9 @@ const sequelize = require("../sequelize");
 const { DataTypes } = require("sequelize/dist");
 
 const Student = sequelize.define("Student", {
-  StudentId: {
+  userId: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement: true,
   },
   firstName: { type: DataTypes.STRING, allowNull: false },
   lastName: { type: DataTypes.STRING, allowNull: false },
@@ -18,27 +17,11 @@ const Student = sequelize.define("Student", {
     allowNull: false,
     validate: { isEmail: true },
   },
-  teamID: {
+  teamId: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
 });
-
-
-Teams.hasMany(Student);
-Student.belongsTo(Teams);
-
-Teams.hasOne(Project);
-Project.belongsTo(Teams);
-
-Project.hasMany(Jury);
-Jury.belongsTo(Project);
-
-Jury.hasOne(Student);
-Student.belongsTo(Jury);
-
-Student.hasOne(User);
-User.belongsTo(Student);
 
 module.exports = Student;
 // module.exports = User;
