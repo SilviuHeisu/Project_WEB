@@ -4,7 +4,7 @@ const { DataTypes } = require("sequelize/dist");
 const Student = sequelize.define("Student", {
   userId: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
   },
   firstName: { type: DataTypes.STRING, allowNull: false },
   lastName: { type: DataTypes.STRING, allowNull: false },
@@ -22,8 +22,6 @@ const Student = sequelize.define("Student", {
     allowNull: false,
   },
 });
-
-
 
 module.exports = Student;
 // module.exports = User;
