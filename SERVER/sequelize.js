@@ -1,4 +1,4 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize } = require("sequelize/dist");
 const sequelize = new Sequelize({
   dialect: "sqlite",
   storage: "./sqlite/databaseProject.db",
