@@ -46,8 +46,8 @@ Jury.belongsTo(Project, { foreignKey: "projectId" });
 Student.hasOne(Jury, { foreignKey: "userId" });
 Jury.belongsTo(Student, { foreignKey: "userId" });
 
-Student.hasOne(User, { foreignKey: "userId" });
-User.belongsTo(Student, { foreignKey: "userId" });
+// Student.hasOne(User, { foreignKey: "userId" });
+// User.belongsTo(Student, { foreignKey: "userId" });
 
 var users = [];
 app.use(bodyParser.json());
@@ -108,7 +108,7 @@ app.delete("/user/:userId", async (req, res) => {
 });
 
 //-----------------------------------STUDENT---------------------------------------------------
-var students = null;
+var students = [];
 
 app.get("/student", async (req, res) => {
   try {

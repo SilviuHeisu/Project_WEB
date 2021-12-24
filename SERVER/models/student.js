@@ -2,9 +2,10 @@ const sequelize = require("../sequelize");
 const { DataTypes } = require("sequelize/dist");
 
 const Student = sequelize.define("Student", {
-  userId: {
+  studentId: {
     type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
   },
   firstName: { type: DataTypes.STRING, allowNull: false },
   lastName: { type: DataTypes.STRING, allowNull: false },

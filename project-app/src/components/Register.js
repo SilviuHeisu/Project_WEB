@@ -1,8 +1,7 @@
+import { render } from "express/lib/application";
 import React from "react";
-import { Form } from "react-bootstrap";
 
 const Register = () => {
-  return <div>HelloOOSSSDS</div>;
+  return <></>;
 };
-
 export default Register;
