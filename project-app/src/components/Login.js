@@ -1,15 +1,10 @@
-import React from "react";
+import React, { Component } from 'react';
+
 
 const Login = () => {
   return (
-    <div>
-      Login PARERWEW
-      <div>Login PARERWEW</div>;<div>Login PARERWEW</div>;
-      <div>Login PARERWEW</div>;<div>Login PARERWEW</div>;
-      <div>Login PARERWEW</div>;<div>Login PARERWEW</div>;
-      <div>Login PARERWEW</div>;<div>Login PARERWEW</div>;
-      <div>Login PARERWEW</div>;<div>Login PARERWEW</div>;
-      <div>Login PARERWEW</div>;
+    <div className="login">
+        <h4>Login</h4>
     </div>
   );
 };
