@@ -6,12 +6,13 @@ const Project = sequelize.define("Project", {
     primaryKey: true,
     autoIncrement: true,
   },
-  projectName:{
-     type: DataTypes.STRING,
-     allowNull: false
-  }, 
+  projectName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   teamId: {
-    type: DataTypes.INTEGER }
+    type: DataTypes.INTEGER,
+  },
 });
 
 module.exports = Project;

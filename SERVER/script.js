@@ -14,7 +14,16 @@ const Teams = require("./models/teams");
 const Jury = require("./models/jury");
 const User = require("./models/user");
 const Project = require("./models/project");
-
+const { use } = require("express/lib/application");
+app.use(bodyParser.json());
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 app.listen(7000, async () => {
   console.log("Server start on 7000");
   try {
@@ -40,7 +49,7 @@ Jury.belongsTo(Student, { foreignKey: "userId" });
 Student.hasOne(User, { foreignKey: "userId" });
 User.belongsTo(Student, { foreignKey: "userId" });
 
-var users = null;
+var users = [];
 app.use(bodyParser.json());
 
 //-----------------------------------USER---------------------------------------------------
@@ -58,6 +67,7 @@ app.post("/user", async (req, res) => {
   try {
     const user = req.body;
     await User.create(user);
+
     res.status(201).json(users);
   } catch (err) {
     console.warn(err);
@@ -102,7 +112,7 @@ var students = null;
 
 app.get("/student", async (req, res) => {
   try {
-    students = await User.findAll();
+    students = await Student.findAll();
 
     res.status(201).json(students);
   } catch (err) {
@@ -243,7 +253,7 @@ app.put("/jury/:projectId", async (req, res) => {
 var teams = null;
 app.get("/team", async (req, res) => {
   try {
-    teams = await User.findAll();
+    teams = await Teams.findAll();
 
     res.status(201).json(teams);
   } catch (err) {
