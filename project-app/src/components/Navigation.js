@@ -11,8 +11,11 @@ const Navigation = () => {
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/register">Register</Nav.Link>
+            <Nav.Link href="/registerProf">Teacher Registration</Nav.Link>
+
             <Nav.Link href="/login">Login</Nav.Link>
             <Nav.Link href="/rate">Rate</Nav.Link>
+
           </Nav>
         </Container>
       </Navbar>

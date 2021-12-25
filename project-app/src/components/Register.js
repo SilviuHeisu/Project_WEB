@@ -18,8 +18,8 @@ const Register = () => {
   let hashedPassword;
 
   function handleSubmit(e) {
+    //debugger;
     e.preventDefault();
-    alert({ firstName });
 
     axios
       .get("http://localhost:7000/student")
@@ -27,6 +27,7 @@ const Register = () => {
         setStudents((students) => [response.data]);
         localStorage.setItem("noStudents", students.length);
         console.log(students);
+       // debugger;
         hashedPassword = bcrypt.hashSync(
           password,
           "$2a$10$CwTycUXWue0Thq9StjUM0u"
@@ -35,15 +36,15 @@ const Register = () => {
       .then((response) => {
         let body = {
           StudentId: localStorage.getItem("noStudents"),
-          firstName: { firstName },
-          lastName: this.lastName,
-          CNP: this.CNP,
-          password: this.hashedPassword,
-          yearOfStudy: this.yearOfStudy,
-          birthYear: this.birthYear,
-          faculty: this.faculty,
-          email: this.email,
-          teamId: this.teamId,
+          firstName: String(firstName),
+          lastName: String(lastName),
+          CNP: String(CNP),
+          password: String(hashedPassword),
+          yearOfStudy: Number(yearOfStudy),
+          birthYear: Number(birthYear),
+          faculty: String(faculty),
+          email: String(email),
+          teamId: Number(teamId),
         };
         axios
           .post("http://localhost:7000/student", body)
