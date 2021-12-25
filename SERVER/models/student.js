@@ -9,6 +9,7 @@ const Student = sequelize.define("Student", {
   },
   firstName: { type: DataTypes.STRING, allowNull: false },
   lastName: { type: DataTypes.STRING, allowNull: false },
+  password: { type: DataTypes.STRING, allowNull: false },
   CNP: { type: DataTypes.STRING, allowNull: false },
   yearOfStudy: { type: DataTypes.INTEGER, allowNull: false },
   birthYear: { type: DataTypes.INTEGER, validate: { min: 1900 } },
