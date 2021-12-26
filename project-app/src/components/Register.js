@@ -18,7 +18,7 @@ const Register = () => {
   let hashedPassword;
 
   function handleSubmit(e) {
-    //debugger;
+
     e.preventDefault();
 
     axios
@@ -27,7 +27,7 @@ const Register = () => {
         setStudents((students) => [response.data]);
         localStorage.setItem("noStudents", students.length);
         console.log(students);
-       // debugger;
+
         hashedPassword = bcrypt.hashSync(
           password,
           "$2a$10$CwTycUXWue0Thq9StjUM0u"
