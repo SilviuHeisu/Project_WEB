@@ -3,12 +3,11 @@ import reactDom from "react-dom";
 import axios from "axios";
 import Prof from "../classes/Prof";
 
-
 const RegisterProf = () => {
   let [prof, setProf] = useState([]);
   const [password, setPassword] = useState("");
   //const bcrypt = require("bcryptjs");
-  const bcrypt=require("bcryptjs");
+  const bcrypt = require("bcryptjs");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -44,42 +43,43 @@ const RegisterProf = () => {
           })
           .catch((err) => {
             console.log(err);
-        });
-    });
+          });
+      });
   }
   return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          value={name}
+          type="text"
+          placeholder="Full Name"
+          onChange={(e) => setName(e.target.value)}
+        />
 
-    <div><form onSubmit={handleSubmit}>
-    <input
-      value={name}
-      type="text"
-      placeholder="Full Name"
-      onChange={(e) => setName(e.target.value)}
-    />
-    
-    <input
-      value={email}
-      type="text"
-      placeholder="email"
-      onChange={(e) => setEmail(e.target.value)}
-    />
-    <input
-      value={password}
-      type="password"
-      placeholder="password"
-      onChange={(e) => setPassword(e.target.value)}
-    />
-    
-    <input
-      value={subject}
-      type="text"
-      placeholder="subject"
-      onChange={(e) => setSubject(e.target.value)}
-    />
-    <button type="submit" value="Submit">
-      Submit
-    </button>
-  </form> </div>
+        <input
+          value={email}
+          type="text"
+          placeholder="email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          value={password}
+          type="password"
+          placeholder="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <input
+          value={subject}
+          type="text"
+          placeholder="subject"
+          onChange={(e) => setSubject(e.target.value)}
+        />
+        <button type="submit" value="Submit">
+          Submit
+        </button>
+      </form>{" "}
+    </div>
   );
 };
 
