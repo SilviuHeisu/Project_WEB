@@ -16,17 +16,7 @@ const Home = () => {
     });
   }, []);
 
-  return (
-    <div>
-      {isLoggedIn ? (
-        <div>
-          {teams.map((item, index) => {
-            <item key={index} item={item}></item>;
-          })}
-        </div>
-      ) : null}
-    </div>
-  );
+  return <div>{isLoggedIn ? <div></div> : null}</div>;
 };
 
 export default Home;
