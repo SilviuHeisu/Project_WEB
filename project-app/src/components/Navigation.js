@@ -14,7 +14,7 @@ const Navigation = () => {
             <Nav.Link href="/registerProf">Teacher Registration</Nav.Link>
 
             <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/rate">Rate</Nav.Link>
+            <Nav.Link href="/partialDeliverable">PartialDeliverable</Nav.Link>
 
           </Nav>
         </Container>

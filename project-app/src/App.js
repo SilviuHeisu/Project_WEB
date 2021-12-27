@@ -7,10 +7,10 @@ import Home from "./components/Home";
 import Register from "./components/Register";
 import RegisterProf from "./components/RegisterProf"
 import Login from "./components/Login";
-import Rate from "./components/Rate";
+import PartialDeliverable from "./components/PartialDeliverable";
 import Switch from "react-router-dom";
 
-
+ 
 
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
           <Route exact path="/home" element={<Home />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login></Login>}></Route>
-          <Route path="/rate" element={<Rate />}></Route>
+          <Route path="/partialDeliverable" element={<PartialDeliverable />}></Route>
           <Route path="/registerProf" element={<RegisterProf />}></Route>
         </Routes>
       </div>
