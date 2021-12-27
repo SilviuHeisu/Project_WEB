@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage}).array('file');
 
-app.post('/upload', (req, res) => {
+app.post('/partialDeliverable', (req, res) => {
     upload(req, res, (err) => {
         if (err) {
             return res.status(500).json(err)
@@ -28,6 +28,6 @@ app.post('/upload', (req, res) => {
     })
 });
 
-app.listen(8000, () => {
+app.listen(3000, () => {
     console.log('App is running on port 3000')
 });

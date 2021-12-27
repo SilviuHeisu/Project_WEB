@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import reactDom from "react-dom";
 import axios from "axios";
 import Student from "../classes/Student";
-
+import { useNavigate } from "react-router-dom";
 const Register = () => {
+  let navigate = useNavigate();
   let [students, setStudents] = useState([]);
   const [password, setPassword] = useState("");
   const bcrypt = require("bcryptjs");
@@ -15,10 +16,10 @@ const Register = () => {
   const [faculty, setFaculty] = useState("");
   const [email, setEmail] = useState("");
   const [teamId, setTeamId] = useState("");
+
   let hashedPassword;
 
   function handleSubmit(e) {
-
     e.preventDefault();
 
     axios
@@ -54,6 +55,7 @@ const Register = () => {
           .catch((err) => {
             console.log(err);
           });
+        navigate("/login");
       });
   }
   return (
@@ -113,6 +115,7 @@ const Register = () => {
           placeholder="team ID"
           onChange={(e) => setTeamId(e.target.value)}
         />
+
         <button type="submit" value="Submit">
           Submit
         </button>
