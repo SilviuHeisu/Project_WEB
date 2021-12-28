@@ -9,6 +9,7 @@ import RegisterProf from "./components/RegisterProf";
 import Login from "./components/Login";
 import PartialDeliverable from "./components/PartialDeliverable";
 import Switch from "react-router-dom";
+import axios from "axios";
 
 function App() {
   // const getUsers = async () => {
@@ -16,13 +17,15 @@ function App() {
   //   const data = await response.json();
   //   console.log(data);
   // };
+
+
   return (
     <BrowserRouter>
       <div className="container">
         <Navigation />
 
         <Routes>
-          <Route exact path="/home" element={<Home />}></Route>
+          <Route exact path="/home" element={<Home/>}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login></Login>}></Route>
           <Route path="/partialDeliverable" element={<PartialDeliverable />}></Route>

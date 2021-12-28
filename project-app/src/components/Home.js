@@ -18,34 +18,40 @@ function TeamList(props){
     console.log(teams[i].teamName);
    }
    const listItems = teams.map((team) =>
-    <div className="Div2">
+    <tr className="Div2" >
       
-        <tr>
-          <td><ul>{team.teamId}</ul></td>
-          <td> <ul>{team.teamName}</ul></td>
-          <td> 
+        
+          <td style={styles}><ul>{team.teamId}</ul></td>
+          <td style={styles}> <ul>{team.teamName}</ul></td>
+          <td style={styles}> 
           <a href="/home/TeamInfo">
   <Button> Team Info </Button>
 </a>
           </td>
+          <td style={styles}> 
+          <a href="/home/Rate">
+  <Button> Rate </Button>
+</a>
+          </td>
          
-        </tr>
+       
          
          
    <br></br>
      
-   </div>
+   </tr>
  );
  return (
-   <div className="Div1">
+   
      <table style={styles}>
      <tr style={styles}><th>Team ID</th>
-        <th>Team Name</th>
+        <th style={styles}>Team Name</th>
         <th>Team Info</th>
+        <th>Rate</th>
         </tr>
-   <ul>{listItems}</ul>
+   <tbody>{listItems}</tbody>
    </table>
-   </div>
+  
  );}
 
 const Home = () => {
