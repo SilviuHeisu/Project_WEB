@@ -15,6 +15,7 @@ const Jury = require("./models/jury");
 const User = require("./models/user");
 const Project = require("./models/project");
 const { use } = require("express/lib/application");
+const { where } = require("sequelize/dist");
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -58,6 +59,22 @@ app.get("/user", async (req, res) => {
     users = await User.findAll();
 
     res.status(201).json(users);
+  } catch (err) {
+    console.warn(err);
+    res.status(500).json({ message: "ERROR" });
+  }
+});
+let studentByTeamId = [];
+app.get("/student/:teamId", async (req, res) => {
+  try {
+    studentByTeamId = await Student.findAll({
+      where: {
+        teamId: req.params.teamId,
+      },
+    });
+    if (studentByTeamId) {
+      res.status(200).json(studentByTeamId);
+    } else res.status(404).json({ message: "not found" });
   } catch (err) {
     console.warn(err);
     res.status(500).json({ message: "ERROR" });
