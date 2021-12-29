@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import PartialDeliverable from "./components/PartialDeliverable";
 import Switch from "react-router-dom";
 import axios from "axios";
+import TeamInfo from "./components/TeamInfo";
 
 function App() {
   // const getUsers = async () => {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/login" element={<Login></Login>}></Route>
           <Route path="/partialDeliverable" element={<PartialDeliverable />}></Route>
           <Route path="/registerProf" element={<RegisterProf />}></Route>
+          <Route path="/home/teamInfo" element={<TeamInfo/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>

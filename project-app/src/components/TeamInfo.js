@@ -31,6 +31,7 @@ const TeamInfo = (props) => {
       });
   });
   return { TeamInfo };
+  
 };
 
 export default TeamInfo;
