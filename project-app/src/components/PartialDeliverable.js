@@ -1,7 +1,7 @@
-import "./partial.css";
+import React from "react";
 
 const PartialDeliverable = () => {
-  return <></>;
+  return <div></div>;
 };
 
 export default PartialDeliverable;

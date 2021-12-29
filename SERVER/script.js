@@ -305,3 +305,15 @@ app.put("/team/:teamId", async (req, res) => {
     res.status(500).json({ message: "ERROR" });
   }
 });
+app.post("/upload", (req, res) => {
+  setTimeout(() => {
+    console.log("file uploaded!");
+    return req
+      .status(200)
+      .json({ result: true, msg: "file was uploaded" }, 3000);
+  });
+});
+app.delete("/upload",(req,res)=>{
+  console.log("file deleted")
+  return res.status(200).json({result:true,msg:'file deleted'})
+})
