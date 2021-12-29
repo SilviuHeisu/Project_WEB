@@ -17,7 +17,9 @@ function TeamList(props) {
     console.log(teams[i].teamId);
     console.log(teams[i].teamName);
   }
-  const listItems = teams.map((team) => (
+  const listItems = teams.map((team) =>{ 
+    const path = `/home/TeamInfo/${team.teamId}`;
+    return(
     <tr className="Div2">
       <td style={styles}>
         <ul>{team.teamId}</ul>
@@ -27,7 +29,7 @@ function TeamList(props) {
         <ul>{team.teamName}</ul>
       </td>
       <td style={styles}>
-        <a href="/home/TeamInfo">
+        <a href={path}>
           <Button> Team Info </Button>
         </a>
       </td>
@@ -39,7 +41,8 @@ function TeamList(props) {
 
       <br></br>
     </tr>
-  ));
+  )
+});
   return (
     <table style={styles}>
       <tr style={styles}>

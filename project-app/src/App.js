@@ -31,7 +31,10 @@ function App() {
           <Route path="/login" element={<Login></Login>}></Route>
           <Route path="/partialDeliverable" element={<PartialDeliverable />}></Route>
           <Route path="/registerProf" element={<RegisterProf />}></Route>
-          <Route path="/home/teamInfo" element={<TeamInfo/>}></Route>
+          <Route path="/home/teamInfo/1" element={<TeamInfo teamId={1} />}></Route>
+          <Route path="/home/teamInfo/2" element={<TeamInfo teamId={2}/>}></Route>
+          <Route path="/home/teamInfo/3" element={<TeamInfo teamId={3}/>}></Route>
+
         </Routes>
       </div>
     </BrowserRouter>
