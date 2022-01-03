@@ -73,9 +73,30 @@ const Home = () => {
   const isLoggedIn = sessionStorage.getItem("isLoggedIn");
   const user = sessionStorage.getItem("user");
   const isProfessor = sessionStorage.getItem("isProfessor");
+  const [team1,setTeam1]=useState([]);
+  const [team2,setTeam2]=useState([]);
+  const [team3,setTeam3]=useState([]);
   useEffect(() => {
     axios.get("http://localhost:7000/team").then((response) => {
       setTeams(response.data);
+       let path1 = `http://localhost:7000/rate/1`;
+        let path2 = `http://localhost:7000/rate/2`;
+        let path3 = `http://localhost:7000/rate/3`;
+    axios.get(path1).then((response) => {
+      setTeam1(response.data);
+      console.log(response.data);     
+    });
+    axios.get(path2).then((response) => {
+      setTeam2(response.data);
+           console.log(response.data);     
+
+    });
+    axios.get(path3).then((response) => {
+      setTeam3(response.data);
+           console.log(response.data);     
+
+    });
+       
     });
     //setIsProfessor(sessionStorage.getItem("isProfessor"));
   }, []);
