@@ -7,6 +7,7 @@ require("./models/student");
 require("./models/teams");
 require("./models/user");
 require("./models/project");
+require("./models/rate");
 
 const sequelize = require("./sequelize");
 const Student = require("./models/student");
@@ -14,6 +15,7 @@ const Teams = require("./models/teams");
 const Jury = require("./models/jury");
 const User = require("./models/user");
 const Project = require("./models/project");
+const Rate = require("./models/rate");
 const { use } = require("express/lib/application");
 const { where } = require("sequelize/dist");
 app.use(bodyParser.json());
@@ -46,6 +48,9 @@ Jury.belongsTo(Project, { foreignKey: "projectId" });
 
 Student.hasOne(Jury, { foreignKey: "userId" });
 Jury.belongsTo(Student, { foreignKey: "userId" });
+
+Teams.hasMany(Rate, {foreignKey:"teamId"});
+Rate.belongsTo(Teams, {foreignKey:"teamId"});
 
 // Student.hasOne(User, { foreignKey: "userId" });
 // User.belongsTo(Student, { foreignKey: "userId" });
@@ -317,3 +322,79 @@ app.delete("/upload",(req,res)=>{
   console.log("file deleted")
   return res.status(200).json({result:true,msg:'file deleted'})
 })
+
+// ---------------------------RATE--------------------------------
+var rates = [];
+
+app.get("/rate", async (req, res) => {
+  try {
+    rates = await Rate.findAll();
+
+    res.status(201).json(rates);
+  } catch (err) {
+    console.warn(err);
+    res.status(500).json({ message: "ERROR" });
+  }
+});
+app.post("/rate", async (req, res) => {
+  try {
+    const rate = req.body;
+    await Rate.create(rate);
+    res.status(201).json(rates);
+  } catch (err) {
+    console.warn(err);
+    res.status(500).json({ message: "ERROR" });
+  }
+});
+
+app.put("/rate/:rateId", async (req, res) => {
+  try {
+    const rate = await Rate.findByPk(req.params.rateId);
+    if (rate) {
+      await rate.update(req.body, {
+        fields: [
+          "mark"
+          
+        ],
+      });
+      res.status(202).json({ message: "accepted" });
+    } else {
+      res.status(404).json({ message: "not found" });
+    }
+  } catch (err) {
+    console.warn(err);
+    res.status(500).json({ message: "ERROR" });
+  }
+});
+
+app.delete("/rate/:rateId", async (req, res) => {
+  try {
+    const rate = await Rate.findByPk(req.params.rateId);
+    if (rate) {
+      await rate.destroy();
+      res.status(202).json({ message: "accepted" });
+    } else {
+      res.status(404).json({ message: "not found" });
+    }
+  } catch (err) {
+    console.warn(err);
+    res.status(500).json({ message: "some error occured" });
+  }
+});
+
+let rateByTeamId = [];
+app.get("/rate/:teamId", async (req, res) => {
+  try {
+    rateByTeamId = await Rate.findAll({
+      where: {
+        teamId: req.params.teamId,
+      },
+    });
+    if (rateByTeamId) {
+      res.status(200).json(rateByTeamId);
+    } else res.status(404).json({ message: "not found" });
+  } catch (err) {
+    console.warn(err);
+    res.status(500).json({ message: "ERROR" });
+  }
+});
