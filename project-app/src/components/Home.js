@@ -6,6 +6,10 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Button } from "react-bootstrap";
+import Rate  from "./Rate";
+
+
+
 
 function TeamList(props) {
   const styles = {
@@ -17,32 +21,36 @@ function TeamList(props) {
     console.log(teams[i].teamId);
     console.log(teams[i].teamName);
   }
-  const listItems = teams.map((team) =>{ 
-    const path = `/home/TeamInfo/${team.teamId}`;
-    return(
-    <tr className="Div2">
-      <td style={styles}>
-        <ul>{team.teamId}</ul>
-      </td>
-      <td style={styles}>
-        {" "}
-        <ul>{team.teamName}</ul>
-      </td>
-      <td style={styles}>
-        <a href={path}>
-          <Button> Team Info </Button>
-        </a>
-      </td>
-      <td style={styles}>
-        <a href="/home/Rate">
-          <Button> Rate </Button>
-        </a>
-      </td>
 
-      <br></br>
-    </tr>
-  )
-});
+  const listItems = teams.map((team) => {
+    const path = `/home/TeamInfo/${team.teamId}`;
+    const pathRate = `/home/rate/${team.teamId}`;
+
+    return (
+      <tr className="Div2">
+        <td style={styles}>
+          <ul>{team.teamId}</ul>
+        </td>
+        <td style={styles}>
+          {" "}
+          <ul>{team.teamName}</ul>
+        </td>
+        <td style={styles}>
+          <a href={path}>
+            <Button> Team Info </Button>
+          </a>
+        </td>
+
+        <td style={styles}>
+          <a href={pathRate}>
+            <Button> Rate </Button>
+          </a>
+        </td>
+        <td style={styles}></td>
+        <br></br>
+      </tr>
+    );
+  });
   return (
     <table style={styles}>
       <tr style={styles}>
@@ -50,6 +58,7 @@ function TeamList(props) {
         <th style={styles}>Team Name</th>
         <th>Team Info</th>
         <th>Rate</th>
+        <th>Current Rating</th>
       </tr>
       <tbody>{listItems}</tbody>
     </table>
@@ -57,8 +66,9 @@ function TeamList(props) {
 }
 
 const Home = () => {
+ 
   const search = useLocation().search;
-  const teamId = localStorage.getItem("teamId");
+
   const [teams, setTeams] = useState([]);
   const isLoggedIn = sessionStorage.getItem("isLoggedIn");
   const user = sessionStorage.getItem("user");
@@ -83,8 +93,10 @@ const Home = () => {
           <TeamList teams={teams} />
         </div>
       ) : null}
+      
     </div>
   );
+        
 };
 
 export default Home;

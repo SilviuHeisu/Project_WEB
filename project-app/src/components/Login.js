@@ -50,10 +50,12 @@ function Login() {
             setUser(students[i]);
             setIsLoggedIn(true);
             navigate("/home", {});
-            localStorage.setItem("teamId", students[i].teamId);
+            sessionStorage.setItem("teamId", students[i].teamId);
             sessionStorage.setItem("isLoggedIn", true);
             sessionStorage.setItem("isProfessor", isProfessor);
-            sessionStorage.setItem("user", user.name);
+            sessionStorage.setItem("user", students[i].email);
+
+           
           } else {
             alert("Wrong Password");
           }

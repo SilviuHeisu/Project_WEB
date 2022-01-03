@@ -11,6 +11,7 @@ import PartialDeliverable from "./components/PartialDeliverable";
 import Switch from "react-router-dom";
 import axios from "axios";
 import TeamInfo from "./components/TeamInfo";
+import Rate from "./components/Rate";
 
 function App() {
   // const getUsers = async () => {
@@ -19,22 +20,36 @@ function App() {
   //   console.log(data);
   // };
 
-
   return (
     <BrowserRouter>
       <div className="container">
         <Navigation />
 
         <Routes>
-          <Route exact path="/home" element={<Home/>}></Route>
+          <Route exact path="/home" element={<Home />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login></Login>}></Route>
-          <Route path="/partialDeliverable" element={<PartialDeliverable />}></Route>
-          <Route path="/registerProf" element={<RegisterProf />}></Route>
-          <Route path="/home/teamInfo/1" element={<TeamInfo teamId={1} />}></Route>
-          <Route path="/home/teamInfo/2" element={<TeamInfo teamId={2}/>}></Route>
-          <Route path="/home/teamInfo/3" element={<TeamInfo teamId={3}/>}></Route>
 
+          <Route
+            path="/partialDeliverable"
+            element={<PartialDeliverable />}
+          ></Route>
+          <Route path="/registerProf" element={<RegisterProf />}></Route>
+          <Route
+            path="/home/teamInfo/1"
+            element={<TeamInfo teamId={1} />}
+          ></Route>
+          <Route
+            path="/home/teamInfo/2"
+            element={<TeamInfo teamId={2} />}
+          ></Route>
+          <Route
+            path="/home/teamInfo/3"
+            element={<TeamInfo teamId={3} />}
+          ></Route>
+          <Route path="/home/rate/1" element={<Rate teamId={1} />}></Route>
+          <Route path="/home/rate/2" element={<Rate teamId={2} />}></Route>
+          <Route path="/home/rate/3" element={<Rate teamId={3} />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
