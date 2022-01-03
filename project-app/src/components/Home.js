@@ -83,16 +83,20 @@ const Home = () => {
         let path2 = `http://localhost:7000/rate/2`;
         let path3 = `http://localhost:7000/rate/3`;
     axios.get(path1).then((response) => {
+      console.log("*****")
       setTeam1(response.data);
       console.log(response.data);     
     });
     axios.get(path2).then((response) => {
+      console.log("*****")
       setTeam2(response.data);
            console.log(response.data);     
 
     });
     axios.get(path3).then((response) => {
+      console.log("*****")
       setTeam3(response.data);
+     
            console.log(response.data);     
 
     });
