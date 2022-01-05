@@ -30,6 +30,7 @@ const Rate = (props) => {
           .post("http://localhost:7000/rate", body)
           .then((response) => {
             console.log(response.data);
+            // localStorage.setItem("Rates",response.data);
           })
           .catch((err) => {
             console.log(err);
@@ -54,7 +55,7 @@ const Rate = (props) => {
           }}
         ></input>
         <a href={"/home"}>
-        <button type="submit" value="Submit">
+        <button type="submit" value="Submit" >
           Submit
         </button>
         </a>

@@ -12,9 +12,10 @@ function Average(props){
  // debugger;
   let avg=0;
   for(let i=0;i<props.team.length;i++){
-avg+=props.team[i];
+      avg+=props.team[i];
   }
-  return(<div>{avg/props.team.length}</div>);
+  console.log(props.team.length)
+  return(<div>{avg/1}</div>);
 
 }
 
@@ -26,6 +27,7 @@ function TeamList(props) {
   const [team1,setTeam1]=useState([]);
   const [team2,setTeam2]=useState([]);
   const [team3,setTeam3]=useState([]);
+
 //   let path1 = `http://localhost:7000/rate/1`;
 //   let path2 = `http://localhost:7000/rate/2`;
 //   let path3 = `http://localhost:7000/rate/3`;
@@ -80,8 +82,10 @@ function TeamList(props) {
           </a>
         </td>
         <td style={styles}>
-      
-{/* <Average team={ team.teamId=1?team1:(team.teamId=2)?team2:team3 }/> */}
+
+          {/* <ul>1</ul> */}
+          { team.teamId === 1 ? props.avg1:(team.teamId === 2)?props.avg2:props.avg3 }
+        {/* <Average team={ team.teamId=1?team1:(team.teamId=2)?team2:team3 }/> */}
         </td>
         <br></br>
       </tr>
@@ -109,11 +113,47 @@ const Home = () => {
   const isLoggedIn = sessionStorage.getItem("isLoggedIn");
   const user = sessionStorage.getItem("user");
   const isProfessor = sessionStorage.getItem("isProfessor");
+  const [avgGrade1, setAvgGrade1] = useState(0);
+  const [avgGrade2, setAvgGrade2] = useState(0);
+  const [avgGrade3, setAvgGrade3] = useState(0);
 
   useEffect(() => {
     axios.get("http://localhost:7000/team").then((response) => {
       setTeams(response.data);
-      
+    });
+    axios.get("http://localhost:7000/rate/1").then((response) => {
+      console.log(" hello world 1");
+      console.log(response.data);
+      let obj = response.data;
+      let avg = 0;
+      for(let x in response.data){
+        avg += response.data[x].mark
+      }
+      avg = avg/response.data.length;
+      console.log(avg);
+      setAvgGrade1(avg);
+    });
+    axios.get("http://localhost:7000/rate/2").then((response) => {
+      console.log(" hello world 2");
+      console.log(response.data);
+      let avg = 0;
+      for(let x in response.data){
+        avg += response.data[x].mark
+      }
+      avg = avg/response.data.length;
+      console.log(avg);
+      setAvgGrade2(avg);
+    });
+    axios.get("http://localhost:7000/rate/3").then((response) => {
+      console.log(" hello world 3");
+      console.log(response.data);
+      let avg = 0;
+      for(let x in response.data){
+        avg += response.data[x].mark
+      }
+      avg = avg/response.data.length;
+      console.log(avg);
+      setAvgGrade3(avg);
     });
     //setIsProfessor(sessionStorage.getItem("isProfessor"));
   }, []);
@@ -128,7 +168,7 @@ const Home = () => {
         <div>
           {" "}
           <h2>Hello there!</h2>
-          <TeamList teams={teams} />
+          <TeamList teams={teams} avg1={avgGrade1} avg2={avgGrade2} avg3={avgGrade3}/>
         </div>
       ) : null}
       
