@@ -54,8 +54,6 @@ function Login() {
             sessionStorage.setItem("isLoggedIn", true);
             sessionStorage.setItem("isProfessor", isProfessor);
             sessionStorage.setItem("user", students[i].email);
-
-           
           } else {
             alert("Wrong Password");
           }
