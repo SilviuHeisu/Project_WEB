@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import reactDom from "react-dom";
 import axios from "axios";
 import Prof from "../classes/Prof";
-
+import { useNavigate } from "react-router-dom";
 const RegisterProf = () => {
   let [prof, setProf] = useState([]);
   const [password, setPassword] = useState("");
@@ -12,7 +12,7 @@ const RegisterProf = () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   let hashedPassword;
-
+  let navigate = useNavigate();
   function handleSubmit(e) {
     e.preventDefault();
     alert({ name });

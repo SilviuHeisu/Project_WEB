@@ -3,7 +3,10 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 const Navigation = () => {
   let isLoggedIn = sessionStorage.getItem("isLoggedIn");
-
+  function reset() {
+    sessionStorage.clear();
+    localStorage.clear();
+  }
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -17,7 +20,9 @@ const Navigation = () => {
 
             <Nav.Link href="/login">Login</Nav.Link>
             <Nav.Link href="/partialDeliverable">PartialDeliverable</Nav.Link>
-            <Nav.Link href="/login">Log out</Nav.Link>
+            <Nav.Link href="/login" onClick={reset}>
+              Log out
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>

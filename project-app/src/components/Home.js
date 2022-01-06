@@ -21,6 +21,7 @@ function TeamList(props) {
   const listItems = teams.map((team) => {
     const path = `/home/TeamInfo/${team.teamId}`;
     const pathRate = `/home/rate/${team.teamId}`;
+    const isProfessor = sessionStorage.getItem("isProfessor");
     console.log(props.teamId);
     return (
       <tr className="Div2">
@@ -38,7 +39,7 @@ function TeamList(props) {
         </td>
 
         <td style={styles}>
-          <a href={pathRate} >
+          <a href={pathRate}>
             <Button disabled={props.teamId == team.teamId ? 1 : 0}>
               {" "}
               Rate{" "}
@@ -104,7 +105,9 @@ const Home = () => {
         avg = avg - min - max;
         avg = avg / (response.data.length - 2);
       } else avg = avg / response.data.length;
-
+      if (teamId != 1 && isProfessor == "false") {
+        avg = "**********";
+      }
       setAvgGrade1(avg);
     });
     axios.get("http://localhost:7000/rate/2").then((response) => {
@@ -120,7 +123,9 @@ const Home = () => {
         avg = avg - min - max;
         avg = avg / (response.data.length - 2);
       } else avg = avg / response.data.length;
-
+      if (teamId != 2 && isProfessor == "false") {
+        avg = "**********";
+      }
       console.log(avg);
       setAvgGrade2(avg);
     });
@@ -139,6 +144,10 @@ const Home = () => {
         avg = avg - min - max;
         avg = avg / (response.data.length - 2);
       } else avg = avg / response.data.length;
+      if (teamId != 3 && isProfessor == "false") {
+        avg = "**********";
+      }
+      setAvgGrade3(avg);
     });
     //setIsProfessor(sessionStorage.getItem("isProfessor"));
   }, []);

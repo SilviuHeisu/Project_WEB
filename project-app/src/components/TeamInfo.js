@@ -2,7 +2,12 @@ import React from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const TeamInfo = (props) => {
+  const [selectedFile, setSelectedFile] = useState();
+  const [isFilePicked, setIsFilePicked] = useState(false);
+
+  let navigate = useNavigate();
   const styles = {
     border: "1px solid black",
   };
@@ -17,6 +22,12 @@ const TeamInfo = (props) => {
       setStudents(response.data);
       console.log(response.data);
     });
+    let teamIdUser = sessionStorage.getItem("teamId");
+    let isProfessor = sessionStorage.getItem("isProfessor");
+    debugger;
+    if (props.teamId != teamIdUser && isProfessor == "false") {
+      navigate("/home");
+    }
   }, []);
 
   listStudents = students.map((student) => (
@@ -61,7 +72,12 @@ const TeamInfo = (props) => {
   ));
   console.log(listStudents);
 
-  return <div>{listStudents}</div>;
+  return (
+    <div>
+      {listStudents}
+      <div></div>
+    </div>
+  );
 };
 
 export default TeamInfo;
