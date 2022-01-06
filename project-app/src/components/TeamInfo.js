@@ -3,16 +3,24 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import VideoInput from "./VideoInput";
 const TeamInfo = (props) => {
-  const [selectedFile, setSelectedFile] = useState();
-  const [isFilePicked, setIsFilePicked] = useState(false);
-
+  function handleSubmission() {
+    window.location.reload();
+  }
   let navigate = useNavigate();
   const styles = {
     border: "1px solid black",
   };
   const [students, setStudents] = useState([]);
   const [teams, setTeams] = useState([]);
+  const [selectedFile, setSelectedFile] = useState();
+  const [isSelected, setIsSelected] = useState(false);
+  const changeHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+    setIsSelected(true);
+  };
+
   let listStudents;
   const lista1 = [1, 2];
   useEffect(() => {
@@ -75,91 +83,33 @@ const TeamInfo = (props) => {
   return (
     <div>
       {listStudents}
-      <div></div>
+      <div>
+        <div>Upload your Deliverables</div>
+
+        <input type="file" name="file" onChange={changeHandler} />
+        {isSelected ? (
+          <div>
+            <p>Filename: {selectedFile.name}</p>
+            <p>Filetype: {selectedFile.type}</p>
+            <p>Size in bytes: {selectedFile.size}</p>
+            <p>
+              lastModifiedDate:{" "}
+              {selectedFile.lastModifiedDate.toLocaleDateString()}
+            </p>
+          </div>
+        ) : (
+          <p>Select a file to show details</p>
+        )}
+        <div className="App">
+          <h1>Video upload</h1>
+          <VideoInput width={400} height={300} />
+        </div>
+        <div>
+          <button onClick={handleSubmission}>Submit</button>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default TeamInfo;
-
-// function TeamList(props) {
-//   const styles = {
-//     border: "1px solid black",
-//   };
-
-//   const teams = props.teams;
-//   for (let i = 0; i < teams.length; i++) {
-//     console.log(teams[i].teamId);
-//     console.log(teams[i].teamName);
-//   }
-//   const listItems = teams.map((team) =>{
-//     const path = `/home/TeamInfo/${team.teamId}`;
-//     return(
-//     <tr className="Div2">
-//       <td style={styles}>
-//         <ul>{team.teamId}</ul>
-//       </td>
-//       <td style={styles}>
-//         {" "}
-//         <ul>{team.teamName}</ul>
-//       </td>
-//       <td style={styles}>
-//         <a href={path}>
-//           <Button> Team Info </Button>
-//         </a>
-//       </td>
-//       <td style={styles}>
-//         <a href="/home/Rate">
-//           <Button> Rate </Button>
-//         </a>
-//       </td>
-
-//       <br></br>
-//     </tr>
-//   )
-// });
-//   return (
-//     <table style={styles}>
-//       <tr style={styles}>
-//         <th>Team ID</th>
-//         <th style={styles}>Team Name</th>
-//         <th>Team Info</th>
-//         <th>Rate</th>
-//       </tr>
-//       <tbody>{listItems}</tbody>
-//     </table>
-//   );
-// }
-
-// const Home = () => {
-//   const search = useLocation().search;
-//   const teamId = localStorage.getItem("teamId");
-//   const [teams, setTeams] = useState([]);
-//   const isLoggedIn = sessionStorage.getItem("isLoggedIn");
-//   const user = sessionStorage.getItem("user");
-//   const isProfessor = sessionStorage.getItem("isProfessor");
-//   useEffect(() => {
-//     axios.get("http://localhost:7000/team").then((response) => {
-//       setTeams(response.data);
-//     });
-//     //setIsProfessor(sessionStorage.getItem("isProfessor"));
-//   }, []);
-
-//   console.log(teams);
-//   console.log(isLoggedIn);
-//   console.log(user);
-
-//   return (
-//     <div>
-//       {isLoggedIn ? (
-//         <div>
-//           {" "}
-//           <h2>Hello there!</h2>
-//           <TeamList teams={teams} />
-//         </div>
-//       ) : null}
-//     </div>
-//   );
-// };
-
-// export default Home;
