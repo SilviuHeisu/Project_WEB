@@ -88,7 +88,7 @@ const Register = () => {
         <input
           value={CNP}
           type="text"
-          placeholder="First Name"
+          placeholder="CNP"
           onChange={(e) => setCNP(e.target.value)}
         />
         <input

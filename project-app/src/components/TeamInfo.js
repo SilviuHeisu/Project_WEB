@@ -6,12 +6,29 @@ import { useNavigate } from "react-router-dom";
 import VideoInput from "./VideoInput";
 const TeamInfo = (props) => {
   function handleSubmission() {
+    let body = {
+      nameOfFile: selectedFile.name,
+      studentWhoUploaded: user,
+      teamId: teamIdUser,
+    };
+    axios
+      .post("http://localhost:7000/deliverable", body)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     window.location.reload();
   }
   let navigate = useNavigate();
   const styles = {
     border: "1px solid black",
   };
+  let teamIdUser = sessionStorage.getItem("teamId");
+
+  let user = sessionStorage.getItem("user");
   const [students, setStudents] = useState([]);
   const [teams, setTeams] = useState([]);
   const [selectedFile, setSelectedFile] = useState();
@@ -30,7 +47,7 @@ const TeamInfo = (props) => {
       setStudents(response.data);
       console.log(response.data);
     });
-    let teamIdUser = sessionStorage.getItem("teamId");
+
     let isProfessor = sessionStorage.getItem("isProfessor");
     debugger;
     if (props.teamId != teamIdUser && isProfessor == "false") {

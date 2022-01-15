@@ -1,16 +1,16 @@
 const sequelize = require("../sequelize");
 const DataTypes = require("sequelize/dist");
-const Project = sequelize.define("Project", {
-  projectId: {
+const Deliverable = sequelize.define("Deliverable", {
+  deliverableId: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  projectName: {
+  nameOfFile: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  description: {
+  studentWhoUploaded: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -20,4 +20,4 @@ const Project = sequelize.define("Project", {
   },
 });
 
-module.exports = Project;
+module.exports = Deliverable;

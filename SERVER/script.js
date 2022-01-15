@@ -8,6 +8,7 @@ require("./models/teams");
 require("./models/user");
 require("./models/project");
 require("./models/rate");
+require("./models/Deliverable");
 
 const sequelize = require("./sequelize");
 const Student = require("./models/student");
@@ -16,6 +17,7 @@ const Jury = require("./models/jury");
 const User = require("./models/user");
 const Project = require("./models/project");
 const Rate = require("./models/rate");
+const Deliverable = require("./models/Deliverable");
 const { use } = require("express/lib/application");
 const { where } = require("sequelize/dist");
 app.use(bodyParser.json());
@@ -49,8 +51,11 @@ Jury.belongsTo(Project, { foreignKey: "projectId" });
 Student.hasOne(Jury, { foreignKey: "userId" });
 Jury.belongsTo(Student, { foreignKey: "userId" });
 
-Teams.hasMany(Rate, {foreignKey:"teamId"});
-Rate.belongsTo(Teams, {foreignKey:"teamId"});
+Teams.hasMany(Rate, { foreignKey: "teamId" });
+Rate.belongsTo(Teams, { foreignKey: "teamId" });
+
+Project.hasMany(Deliverable, { foreignKey: "teamId" });
+Deliverable.belongsTo(Project, { foreignKey: "teamId" });
 
 // Student.hasOne(User, { foreignKey: "userId" });
 // User.belongsTo(Student, { foreignKey: "userId" });
@@ -318,10 +323,10 @@ app.post("/upload", (req, res) => {
       .json({ result: true, msg: "file was uploaded" }, 3000);
   });
 });
-app.delete("/upload",(req,res)=>{
-  console.log("file deleted")
-  return res.status(200).json({result:true,msg:'file deleted'})
-})
+app.delete("/upload", (req, res) => {
+  console.log("file deleted");
+  return res.status(200).json({ result: true, msg: "file deleted" });
+});
 
 // ---------------------------RATE--------------------------------
 var rates = [];
@@ -352,10 +357,7 @@ app.put("/rate/:rateId", async (req, res) => {
     const rate = await Rate.findByPk(req.params.rateId);
     if (rate) {
       await rate.update(req.body, {
-        fields: [
-          "mark"
-          
-        ],
+        fields: ["mark"],
       });
       res.status(202).json({ message: "accepted" });
     } else {
@@ -383,7 +385,7 @@ app.delete("/rate/:rateId", async (req, res) => {
 });
 
 let rateByTeamId = [];
-app.get("/rate/:teamId", async (req, res) => {
+app.get("/deliverable/:projectId", async (req, res) => {
   try {
     rateByTeamId = await Rate.findAll({
       where: {
@@ -392,6 +394,44 @@ app.get("/rate/:teamId", async (req, res) => {
     });
     if (rateByTeamId) {
       res.status(200).json(rateByTeamId);
+    } else res.status(404).json({ message: "not found" });
+  } catch (err) {
+    console.warn(err);
+    res.status(500).json({ message: "ERROR" });
+  }
+});
+let deliverables = [];
+app.get("/deliverable", async (req, res) => {
+  try {
+    deliverables = await Deliverable.findAll();
+
+    res.status(201).json(deliverables);
+  } catch (err) {
+    console.warn(err);
+    res.status(500).json({ message: "ERROR" });
+  }
+});
+
+app.post("/deliverable", async (req, res) => {
+  try {
+    const deliverable = req.body;
+    await Deliverable.create(deliverable);
+
+    res.status(201).json(deliverable);
+  } catch (err) {
+    console.warn(err);
+    res.status(500).json({ message: "ERROR" });
+  }
+});
+app.get("/deliverable/:projectId", async (req, res) => {
+  try {
+    deliverablesByProject = await Deliverable.findAll({
+      where: {
+        projectId: req.params.projectId,
+      },
+    });
+    if (deliverablesByProject) {
+      res.status(200).json(deliverablesByProject);
     } else res.status(404).json({ message: "not found" });
   } catch (err) {
     console.warn(err);
