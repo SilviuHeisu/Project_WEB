@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import VideoInput from "./VideoInput";
+
 const TeamInfo = (props) => {
   function handleSubmission() {
     let body = {
@@ -101,7 +101,7 @@ const TeamInfo = (props) => {
     <div>
       {listStudents}
       <div>
-        <div>Upload your Deliverables</div>
+        <div>Upload your Deliverables/Videos</div>
 
         <input type="file" name="file" onChange={changeHandler} />
         {isSelected ? (
@@ -117,10 +117,7 @@ const TeamInfo = (props) => {
         ) : (
           <p>Select a file to show details</p>
         )}
-        <div className="App">
-          <h1>Video upload</h1>
-          <VideoInput width={400} height={300} />
-        </div>
+
         <div>
           <button onClick={handleSubmission}>Submit</button>
         </div>
