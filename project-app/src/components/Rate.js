@@ -11,8 +11,10 @@ const Rate = (props) => {
   let path;
   const [grade, setGrade] = useState();
   debugger;
+  let isProfessor = sessionStorage.getItem("isProfessor");
   sessionStorage.setItem("TeamRated", props.teamId);
-  if (props.teamId == sessionStorage.getItem("teamId")) navigate("/home");
+  if (props.teamId == sessionStorage.getItem("teamId") && isProfessor == false)
+    navigate("/home");
   function handleSubmit(e) {
     e.preventDefault();
 

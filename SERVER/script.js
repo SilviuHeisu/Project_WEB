@@ -368,7 +368,22 @@ app.put("/rate/:rateId", async (req, res) => {
     res.status(500).json({ message: "ERROR" });
   }
 });
-
+let rateFiltered = [];
+app.get("/rate/:teamId", async (req, res) => {
+  try {
+    rateFiltered = await Rate.findAll({
+      where: {
+        teamId: req.params.teamId,
+      },
+    });
+    if (rateFiltered) {
+      res.status(200).json(rateFiltered);
+    } else res.status(404).json({ message: "not found" });
+  } catch (err) {
+    console.warn(err);
+    res.status(500).json({ message: "ERROR" });
+  }
+});
 app.delete("/rate/:rateId", async (req, res) => {
   try {
     const rate = await Rate.findByPk(req.params.rateId);

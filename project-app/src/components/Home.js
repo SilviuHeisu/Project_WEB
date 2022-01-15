@@ -40,7 +40,11 @@ function TeamList(props) {
 
         <td style={styles}>
           <a href={pathRate}>
-            <Button disabled={props.teamId == team.teamId ? 1 : 0}>
+            <Button
+              disabled={
+                props.teamId == team.teamId && isProfessor == false ? 1 : 0
+              }
+            >
               {" "}
               Rate{" "}
             </Button>
