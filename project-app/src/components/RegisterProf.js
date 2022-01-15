@@ -30,7 +30,7 @@ const RegisterProf = () => {
       })
       .then((response) => {
         let body = {
-          userId: localStorage.getItem("noProf"),
+          userId: Number(localStorage.getItem("noProf") + 1),
           name: String(name),
           email: String(email),
           password: String(hashedPassword),
