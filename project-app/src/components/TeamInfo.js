@@ -3,7 +3,37 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+function ProjectList(props){
+  const listItems = props.deliverables.map(del =>{
+    if(del.teamId === props.teamId)
+    return(
+    <tr>
+      <td>
+        <ul>{del.deliverableId}</ul>
+      </td>
+      <td>
+        <ul>{del.nameOfFile}</ul>
+      </td>
+      <td>
+        <ul>{del.studentWhoUploaded}</ul>
+      </td>
+    </tr>
+    )
+  });
+  return (
+    <div>
+    <h2>Team Id: {props.teamId}</h2>
+    <table>
+      <tr>
+        <th>DeliverableID</th>
+        <th> FileName</th>
+        <th>Uploaded by</th>
+      </tr>
+      <tbody>{listItems}</tbody>
+    </table>
+    </div>
+  );
+}
 const TeamInfo = (props) => {
   function handleSubmission() {
     let body = {
@@ -31,6 +61,7 @@ const TeamInfo = (props) => {
   let user = sessionStorage.getItem("user");
   const [students, setStudents] = useState([]);
   const [teams, setTeams] = useState([]);
+  const [deliverables, setDeliverables] = useState([]);
   const [selectedFile, setSelectedFile] = useState();
   const [isSelected, setIsSelected] = useState(false);
   const changeHandler = (event) => {
@@ -48,8 +79,17 @@ const TeamInfo = (props) => {
       console.log(response.data);
     });
 
+    axios.get("http://localhost:7000/deliverable").then((response)=>
+    {
+    setDeliverables(response.data);
+    console.log("Deliverables\n");
+    console.log(response.data);
+
+    }
+    );
+
     let isProfessor = sessionStorage.getItem("isProfessor");
-    debugger;
+    // debugger;
     if (props.teamId != teamIdUser && isProfessor == "false") {
       navigate("/home");
     }
@@ -77,8 +117,7 @@ const TeamInfo = (props) => {
 
     //       <br></br>
     //     </tr>
-    <div className="Div2">
-      <tr>
+        <tr>
         <td style={styles}>
           <ul>{student.firstName}</ul>
         </td>
@@ -91,15 +130,21 @@ const TeamInfo = (props) => {
           <ul>{student.yearOfStudy}</ul>
         </td>
       </tr>
-
-      <br></br>
-    </div>
   ));
   console.log(listStudents);
 
   return (
     <div>
-      {listStudents}
+      <h2>Team members:</h2>
+      <table>
+        <tr style={styles}>
+        <th style={styles}> First Name</th>
+        <th style={styles}>Last Name</th>
+        <th style={styles}>Year of Study</th>
+        </tr>
+        {listStudents}
+        </table>
+      <ProjectList teamId={props.teamId} deliverables={deliverables}></ProjectList>
       <div>
         <div>Upload your Deliverables/Videos</div>
 
